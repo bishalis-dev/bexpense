@@ -1,24 +1,27 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Text, View } from '@/components/Themed';
-import {TextCss} from './transaction';
+import { View, Text, StyleSheet } from 'react-native';
+import Card from '@/components/Card';
+import TabsSection from '@/components/TabSection';
 
-export default function TabOneScreen() {
-  const getCurrentGreeting = () => {
-    const currentHour = new Date().getHours();
-    if (currentHour < 12) return 'Good Morning!';
-    if (currentHour < 18) return 'Good Afternoon!';
-    return 'Good Evening!';
-  };
-
+export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.greeting}>{getCurrentGreeting()}</Text>
-    {/* show current time */}
-    <Text style={TextCss.text}>Current Time: {new Date().toLocaleTimeString()}</Text>
-      <Text style={styles.description}>
-        This is your personalized welcome screen. Have a great day ahead!
-      </Text>
+      {/* Total Balance */}
+      <View style={styles.balanceContainer}>
+        <Text style={styles.balanceTitle}>Total Available Balance</Text>
+        <Text style={styles.balanceAmount}>$9,400</Text>
+      </View>
+
+      {/* Cards Section */}
+      <View style={styles.cardsContainer}>
+        <Card title="Receivable" amount="$5,000" icon="arrow-down" color="#4CAF50" />
+        <Card title="Payable" amount="$1,200" icon="arrow-up" color="#F44336" />
+        <Card title="Expenses" amount="$2,500" icon="shopping-cart" color="#2196F3" />
+        <Card title="Income" amount="$7,800" icon="money" color="#FFC107" />
+      </View>
+
+      {/* Tabs Section */}
+      <TabsSection />
     </View>
   );
 }
@@ -26,31 +29,27 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#FFF9F0',
     padding: 20,
-    backgroundColor: '#f9f9f9',
+    width: '100%',
   },
-  greeting: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: '#4A90E2',
-    marginBottom: 10,
+  balanceContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginVertical: 5,
-  },
-  separator: {
-    marginVertical: 20,
-    height: 1,
-    width: '80%',
-    backgroundColor: '#ccc',
-  },
-  description: {
+  balanceTitle: {
     fontSize: 16,
-    textAlign: 'center',
-    color: '#666',
+    color: '#888',
+  },
+  balanceAmount: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  cardsContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
 });
