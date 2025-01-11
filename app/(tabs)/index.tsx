@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Text, View } from '@/components/Themed';
+import {TextCss} from './transaction';
 
 export default function TabOneScreen() {
   const getCurrentGreeting = () => {
@@ -14,7 +15,7 @@ export default function TabOneScreen() {
     <View style={styles.container}>
       <Text style={styles.greeting}>{getCurrentGreeting()}</Text>
     {/* show current time */}
-    <Text style={styles.description}>Current Time: {new Date().toLocaleTimeString()}</Text>
+    <Text style={TextCss.text}>Current Time: {new Date().toLocaleTimeString()}</Text>
       <Text style={styles.description}>
         This is your personalized welcome screen. Have a great day ahead!
       </Text>

@@ -1,20 +1,11 @@
 import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
+import { Tabs } from 'expo-router';
+import { FontAwesome } from '@expo/vector-icons';
 
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 import CustomTopBar from '@/components/CustomTopBar';
-
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
+import CustomBottomBar from '@/components/CustomBottomBar';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -23,39 +14,49 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        // headerShown: useClientOnlyValue(false, false),
-        header: () => <CustomTopBar />,
-      }}>
+        tabBarInactiveTintColor: '#ccc',
+        header: () => <CustomTopBar />, // Custom Top Bar
+      }}
+      tabBar={(props) => <CustomBottomBar {...props} />} // Custom Bottom Bar
+    >
+      {/* Home Tab */}
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Welcome Bishal,',
-          tabBarLabel: 'Home',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
+          tabBarLabel: 'Homes',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="home" color={color} size={size || 24} />
           ),
         }}
       />
+      {/* Transaction Tab */}
       <Tabs.Screen
-        name="two"
+        name="transaction"
         options={{
-          title: 'About Bishal',
-          tabBarLabel: 'About',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarLabel: 'Transactions',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="exchange" color={color} size={size || 24} />
+          ),
+        }}
+      />
+      {/* Budget Tab */}
+      <Tabs.Screen
+        name="budget"
+        options={{
+          tabBarLabel: 'Budget',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="pie-chart" color={color} size={size || 24} />
+          ),
+        }}
+      />
+      {/* Profile Tab */}
+      <Tabs.Screen
+        name="profile"
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="user" color={color} size={size || 24} />
+          ),
         }}
       />
     </Tabs>
