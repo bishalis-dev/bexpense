@@ -1,36 +1,26 @@
-import React, { useState } from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import { View, Text, Pressable, StyleSheet } from "react-native";
+import Dropdown from "./Dropdown";
 
 export default function TabsSection() {
-  const [activeParentTab, setActiveParentTab] = useState('Expenses & Income');
-  const [activeChildTab, setActiveChildTab] = useState('Today');
+  const [activeParentTab, setActiveParentTab] = useState("Expenses & Income");
+  const [activeChildTab, setActiveChildTab] = useState("Today");
 
-  const parentTabs = ['Expenses & Income', 'Payable & Receivable'];
-  const childTabs = ['Today', 'This Week', 'This Month'];
+  const parentTabs = ["All","Expenses & Income", "Payable & Receivable"];
+  const childTabs = ["Today", "This Week", "This Month"];
 
   return (
     <View style={styles.container}>
       {/* Parent Tabs */}
-      <View style={styles.parentTabs}>
-        {parentTabs.map((tab) => (
-          <Pressable
-            key={tab}
-            style={[
-              styles.parentTab,
-              tab === activeParentTab && styles.activeParentTab,
-            ]}
-            onPress={() => setActiveParentTab(tab)}
-          >
-            <Text
-              style={[
-                styles.parentTabText,
-                tab === activeParentTab && styles.activeParentTabText,
-              ]}
-            >
-              {tab}
-            </Text>
-          </Pressable>
-        ))}
+      <View>
+        <View style={styles.textWithDropdown}>
+          <Text style={[styles.parentTabText]}>Transaction Summary </Text>
+          <Dropdown
+            options={parentTabs}
+            selected={activeParentTab}
+            onSelect={setActiveParentTab}
+          />
+        </View>
       </View>
 
       {/* Child Tabs */}
@@ -61,48 +51,56 @@ export default function TabsSection() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
+  },
+  textWithDropdown: {
+    display: "flex",  // Added
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
   },
   parentTabs: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 20,
   },
   parentTab: {
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 20,
-    backgroundColor: '#EEE',
+    backgroundColor: "#EEE",
   },
   activeParentTab: {
-    backgroundColor: '#8A2BE2',
+    backgroundColor: "#8A2BE2",
   },
   parentTabText: {
     fontSize: 14,
-    color: '#666',
+    color: "#666",
   },
   activeParentTabText: {
-    color: '#FFF',
+    color: "#FFF",
   },
   childTabs: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   childTab: {
+    width: "30%",
     paddingVertical: 8,
     paddingHorizontal: 15,
+    justifyContent: "center",
     borderRadius: 20,
-    backgroundColor: '#EEE',
+    backgroundColor: "#EEE",
   },
   activeChildTab: {
-    backgroundColor: '#8A2BE2',
+    backgroundColor: "#8A2BE2",
   },
   childTabText: {
     fontSize: 12,
-    color: '#666',
+    color: "#666",
   },
   activeChildTabText: {
-    color: '#FFF',
+    color: "#FFF",
   },
 });
