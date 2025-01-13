@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-} from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
-import Dropdown from '@/components/Dropdown';
-import { months } from '@/data/Months';
+import React, { useState } from "react";
+import { View, Text, Image, StyleSheet, Pressable } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
+import Dropdown from "@/components/Dropdown";
+import { months } from "@/data/Months";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CustomTopBar() {
-  const [currentMonth, setCurrentMonth] = useState(months[new Date().getMonth()]);
+  const [currentMonth, setCurrentMonth] = useState(
+    months[new Date().getMonth()]
+  );
+  const navigation = useNavigation<any>(); // Hook for navigation
 
   // Example notification count (replace with dynamic value)
   const notificationCount = 5;
@@ -19,7 +18,7 @@ export default function CustomTopBar() {
     <View style={styles.container}>
       {/* Profile Picture */}
       <Image
-        source={{ uri: 'https://via.placeholder.com/50' }} // Replace with actual image URL
+        source={{ uri: "https://via.placeholder.com/50" }} // Replace with actual image URL
         style={styles.profilePic}
       />
 
@@ -31,53 +30,56 @@ export default function CustomTopBar() {
       />
 
       {/* Notification Icon with Badge */}
-      <View style={styles.notificationContainer}>
+      <Pressable
+        style={styles.notificationContainer}
+        onPress={() => navigation.navigate("screens/notification")} // Use "notification"
+      >
         <FontAwesome name="bell" size={24} color="#8A2BE2" />
         {notificationCount > 0 && (
           <View style={styles.badge}>
             <Text style={styles.badgeText}>{notificationCount}</Text>
           </View>
         )}
-      </View>
+      </Pressable>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingVertical: 10,
-    backgroundColor: '#FFF9F0', // Background color similar to the image
+    backgroundColor: "#FFF9F0", // Background color similar to the image
     borderBottomWidth: 1,
-    borderBottomColor: '#f2f2f2',
+    borderBottomColor: "#f2f2f2",
   },
   profilePic: {
     width: 40,
     height: 40,
     borderRadius: 20,
     borderWidth: 2,
-    borderColor: '#8A2BE2', // Purple border
+    borderColor: "#8A2BE2", // Purple border
   },
   notificationContainer: {
-    position: 'relative',
+    position: "relative",
   },
   badge: {
-    position: 'absolute',
+    position: "absolute",
     top: -5,
     right: -5,
-    backgroundColor: '#FF0000', // Red badge color
+    backgroundColor: "#FF0000", // Red badge color
     borderRadius: 10,
     width: 20,
     height: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   badgeText: {
-    color: '#FFF',
+    color: "#FFF",
     fontSize: 12,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });

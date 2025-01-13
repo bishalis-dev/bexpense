@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import PressableGroup from "./PressableGroup";
+import { TransactionOptions } from "@/data/TransactionOptions";
 
 interface TransactionBottomSheetProps {
   visible: boolean;
@@ -42,7 +43,7 @@ export default function TransactionBottomSheet({
   };
 
   return (
-    <Modal visible={visible} transparent animationType="slide">
+    <Modal visible={visible} transparent animationType="fade">
       <TouchableWithoutFeedback onPress={onClose}>
         <View style={styles.overlay} />
       </TouchableWithoutFeedback>
@@ -55,12 +56,7 @@ export default function TransactionBottomSheet({
         ]}>
           <Text style={styles.fieldTitle}>Select an Option</Text>
           <PressableGroup
-            items={[
-              { id: "1", label: "Option 1" },
-              { id: "2", label: "Option 2" },
-              { id: "3", label: "Option 3" },
-              { id: "4", label: "Option 4" },
-            ]}
+            items={TransactionOptions}
             onSelect={handleSelection}
             // initialSelectedId="2" // Optional: Set the initially selected item
           />

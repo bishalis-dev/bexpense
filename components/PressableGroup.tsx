@@ -12,10 +12,10 @@ export default function PressableGroup({
   onSelect,
   initialSelectedId,
 }: PressableGroupProps) {
-  const [selectedId, setSelectedId] = useState(initialSelectedId || items[0]?.id);
+  const [selectedId, setSelectedOption] = useState(initialSelectedId || items[0]?.id);
 
   const handlePress = (id: string) => {
-    setSelectedId(id);
+    setSelectedOption(id);
     onSelect(id);
   };
 
