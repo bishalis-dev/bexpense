@@ -39,13 +39,13 @@ export default function TabLayout() {
           ),
         }}
       />
-      {/* Budget Tab */}
+      {/* categories Tab */}
       <Tabs.Screen
-        name="budget"
+        name="categories"
         options={{
-          tabBarLabel: 'Budget',
+          tabBarLabel: "Accounts",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="pie-chart" color={color} size={size || 24} />
+            <FontAwesome name="folder" color={color} size={size || 24} />
           ),
         }}
       />

@@ -19,39 +19,32 @@ export default function PrimaryButton({
   return (
     <TouchableOpacity
       style={[
-        styles.button,
+        styles.Button,
         disabled && styles.disabledButton, // Apply disabled styles when applicable
         style,
       ]}
       onPress={disabled ? undefined : onPress} // Disable onPress when button is disabled
       activeOpacity={0.8}
     >
-      <Text style={[styles.title, textStyle]}>{title}</Text>
+      <Text style={[styles.buttonText, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#2196F3',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 5,
-    elevation: 3, // Adds shadow for Android
-    shadowColor: '#000', // Adds shadow for iOS
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
+  Button: {
+    backgroundColor: "#8A2BE2",
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 20,
+  },
+  buttonText: {
+    color: "#FFF",
+    fontSize: 16,
+    fontWeight: "bold",
   },
   disabledButton: {
-    backgroundColor: '#B0BEC5', // Grayish color for disabled state
-  },
-  title: {
-    color: '#FFF',
-    fontSize: 14,
-    fontWeight: 'bold',
+    backgroundColor: "#CCC", // Light gray background
   },
 });
